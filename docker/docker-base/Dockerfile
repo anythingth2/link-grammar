@@ -8,17 +8,14 @@ MAINTAINER Linas Vepstas linasvepstas@gmail.com
 RUN apt-get update
 RUN apt-get -y install apt-utils
 RUN apt-get -y install gcc g++ make
+RUN apt-get install -y pkg-config
+RUN apt-get install -y flex
+RUN apt-get install -y automake libtool m4 autoconf-archive
 
-# Need wget to download link-grammar source
-RUN apt-get -y install wget
+RUN apt-get -y install git
 
-# Download the current released version of link-grammar.
-# RUN http://www.abisource.com/downloads/link-grammar/current/link-grammar-5*.tar.gz
-# The wget tries to guess the correct file to download w/ wildcard
-RUN wget -r --no-parent -nH --cut-dirs=2 http://www.abisource.com/downloads/link-grammar/current/
-
-# Unpack the sources, too.
-RUN tar -zxf current/link-grammar-5*.tar.gz
+RUN git clone https://github.com/kaamanita/link-grammar.git
+RUN (cd link-grammar; ./autogen.sh)
 
 # Need the locales for utf8
 RUN apt-get install locales

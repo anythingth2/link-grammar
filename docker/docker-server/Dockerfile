@@ -18,7 +18,7 @@ RUN apt-get install -y ant
 
 # Perform the standard build.
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
-RUN (cd link-grammar-5*; mkdir build; cd build; ../configure; make -j12; make install; ldconfig)
+RUN (cd link-grammar; mkdir build; cd build; ../configure; make -j12; make install; ldconfig)
 
 # The link-parser server runs on port 9000 by default
 EXPOSE 9000
